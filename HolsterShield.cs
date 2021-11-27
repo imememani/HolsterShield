@@ -26,6 +26,19 @@ namespace HolsterShield
             holstershield.module = this;
         }
 
+        /* Here's what I would like to do, I don't know if it's possible or what I should do but here's the main stuff :
+            - Create a Plumbata class for the projectile that are created
+            - Add a spell that allow to modify some property of the shield and for example, make the shield levitate next to the player with a spell class
+            - Create a controller that coordinates all of this ??
+        
+        
+        Any advice or at least beginning of classes and how they can interact together is welcome
+        I'm still lacking on how classes can work together and mostly where is the entry point of the code
+
+
+        I took inspiration of Shatterblade to make the item and monobehavior, but it's a bit confusing on how exactly it works
+        */
+
         public class HolsterShield : MonoBehaviour
         {
             public HolsterShieldItemModule module;
@@ -91,6 +104,10 @@ namespace HolsterShield
                 }
                 //Coroutine to make despawn the plumbata when 1 minute have passed
                 GameManager.local.StartCoroutine(regulateNbProjectile());
+                
+                // Make the fired projectile attract creatures that are at a 1m radius for example
+                // I doubt a coroutine here is the best plan here... Any pointers ??
+
                 //GameManager.local.StartCoroutine(vortexTrailRoutine());
                 //Make sure player exist
                 if (Player.local.creature != null)
