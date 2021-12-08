@@ -1,27 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Threading.Tasks;
 using ThunderRoad;
 using UnityEngine;
-using SnippetCode;
-using System.Collections;
 
 namespace SnippetCode
 {
-    static class SnippetCode
+    /// <summary>
+    /// Extension utilities.
+    /// </summary>
+    internal static class ExtensionUtilities
     {
         /// <summary>
         /// Vector pointing away from the palm
         /// </summary>
-        public static Vector3 PalmDir(this RagdollHand hand) => -hand.transform.forward;
+        public static Vector3 PalmDir(this RagdollHand hand)
+        {
+            return -hand.transform.forward;
+        }
 
         /// <summary>
         /// Vector pointing in the direction of the thumb
         /// </summary>
-        public static Vector3 ThumbDir(this RagdollHand hand) => (hand.side == Side.Right) ? hand.transform.up : -hand.transform.up;
+        public static Vector3 ThumbDir(this RagdollHand hand)
+        {
+            return (hand.side == Side.Right) ? hand.transform.up : -hand.transform.up;
+        }
 
         /// <summary>
         /// Vector pointing away in the direction of the fingers
@@ -33,6 +36,9 @@ namespace SnippetCode
         /// </summary>
         public static Vector3 PosAboveBackOfHand(this RagdollHand hand) => hand.transform.position - hand.transform.right * 0.1f + hand.transform.forward * 0.2f;
 
+        /// <summary>
+        /// Set the VFX property on the target effect instance equal to the generic type T data instance.
+        /// </summary>
         public static void SetVFXProperty<T>(this EffectInstance effect, string name, T data)
         {
             if (effect == null)
@@ -65,6 +71,10 @@ namespace SnippetCode
                     effectVfx2.vfx.SetTexture(name, t5);
             }
         }
+
+        /// <summary>
+        /// Get a property value of type T from the target effect instance.
+        /// </summary>
         public static object GetVFXProperty(this EffectInstance effect, string name)
         {
             foreach (Effect effect1 in effect.effects)
@@ -81,15 +91,8 @@ namespace SnippetCode
                         return effectVfx1.vfx.GetInt(name);
                 }
             }
+
             return null;
         }
-        public static Vector3 zero = Vector3.zero;
-        public static Vector3 one = Vector3.one;
-        public static Vector3 forward = Vector3.forward;
-        public static Vector3 right = Vector3.right;
-        public static Vector3 up = Vector3.up;
-        public static Vector3 back = Vector3.back;
-        public static Vector3 left = Vector3.left;
-        public static Vector3 down = Vector3.down;
     }
 }
